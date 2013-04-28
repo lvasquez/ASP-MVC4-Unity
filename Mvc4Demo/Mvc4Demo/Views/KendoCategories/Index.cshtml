@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kendo CRUD</h2>
+<br />
+        @(Html.Kendo().Grid<Mvc4Demo.Models.CategoriesViewModel>()
+            .Name("Categories")
+            .Columns(columns =>
+                         {
+                             columns.AutoGenerate(true);
+                             columns.Command(command =>
+                                                 {
+                                                     command.Edit();
+                                                     command.Destroy();
+                                                 }).Width(200);
+                         })
+            .DataSource(datasoure => datasoure.Ajax()
+                                        .Model(model => model.Id(record => record.CategoryID))
+                                        .Read(read => read.Action("GetAll", "KendoCategories"))
+                                        .Create(create => create.Action("Add", "KendoCategories"))
+                                        .Update(update => update.Action("Update", "KendoCategories"))
+                                        .Destroy(delete => delete.Action("Delete", "KendoCategories"))
+                                        .PageSize(15)
+            )
+            .ToolBar(toolbar => toolbar.Create())
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Sortable()
+            .Selectable()
+            .Pageable(pageable =>
+                          {
+                              pageable.Refresh(true);
+                              pageable.PageSizes(true);
+                          })
+        )

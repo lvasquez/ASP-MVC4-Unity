@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+   
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+        <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.common.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.rtl.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.default.min.css")">
+
+        @Scripts.Render("~/bundles/jquery")  
+        <script src="@Url.Content("~/Scripts/kendo/kendo.web.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/kendo.all.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/kendo.aspnetmvc.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/console.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/prettify.min.js")"></script>
+        @{
+            var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+        }
+
+            <script src="@Url.Content("~/Scripts/kendo/cultures/kendo.culture." + culture + ".min.js")"></script>
+
+            <script>
+                kendo.culture("@culture");
+            </script>
+
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("MVC 4 Demo", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        Hello, <span class="username">Luis</span>!
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                            <li>@Html.ActionLink("Kendo Categories", "Index", "KendoCategories")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+
+        
+        @Scripts.Render("~/bundles/jqueryui")    
+        @Scripts.Render("~/bundles/jqueryval")     
+        
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
